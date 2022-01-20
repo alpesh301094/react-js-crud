@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory} from "react-router-dom";
 import {useFormik } from 'formik';
 import axios from 'axios';
-
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 const baseUrl = 'http://localhost/soul_business/public/api';
 
@@ -29,6 +31,7 @@ const validate = values => {
 }
 
 const Add = () => {
+    let history = useHistory();
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -45,14 +48,23 @@ const Add = () => {
                 // headers: { "Content-Type": "multipart/form-data" },
               })
                 .then(function (response) {
-                console.log(response);
-                  if(response.data.status == true){
-                      alert(response.data.message)
-                  }
+                    if(response.data.status === true){
+                        history.push("/");
+                        toast.success(response.data.message, {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                        formik.resetForm();
+                    }
                 })
                 .catch(function (response) {
-                  //handle error
-                  console.log(response);
+                    // handle error
+                    // console.log(response);
                 });
         },
     }); 
@@ -98,7 +110,7 @@ const Add = () => {
                         {formik.errors.mobile_number ? <div className="text-danger">{formik.errors.mobile_number}</div> : null}
                     </div>
                     <div className="d-flex pt-1">
-                        <button className="btn btn-success" >Submit</button>
+                        <button type="submit" className="btn btn-success" >Submit</button>
                         &nbsp;<Link to="/">
                             <button type="button" className="btn btn-danger">
                                 BACK
