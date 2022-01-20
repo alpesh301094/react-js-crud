@@ -4,6 +4,9 @@ import axios from 'axios';
 import 'font-awesome/css/font-awesome.min.css';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 const baseUrl = 'http://localhost/soul_business/public/api';
 
@@ -29,6 +32,15 @@ const Home = () => {
                 label: 'Yes',
                 onClick: () => 
                     axios.delete(`${baseUrl}/delete-users/${id}`).then((response) => {
+                        toast.success(response.data.message, {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                         geteUsers();
                     })
               },

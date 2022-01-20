@@ -51,7 +51,7 @@ const Add = () => {
                     if(response.data.status === true){
                         history.push("/");
                         toast.success(response.data.message, {
-                            position: "top-center",
+                            position: "top-right",
                             autoClose: 5000,
                             hideProgressBar: false,
                             closeOnClick: true,
