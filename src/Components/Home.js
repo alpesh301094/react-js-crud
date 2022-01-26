@@ -6,6 +6,9 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import Edit from '../Components/Edit';
+
 toast.configure()
 
 const baseUrl = 'http://localhost/soul_business/public/api';
@@ -22,13 +25,16 @@ const Home = () => {
             setUser(response.data.data)
         })
     }
-
+    const editUser = (user) => {
+        // console.log(user);
+        <Edit userdata={user} />
+    }
     const deleteUser = (id) => {
         confirmAlert({
             title: 'Confirm!',
             message: 'Are you sure, you want to delete this record.',
             buttons: [
-              {
+                {
                 label: 'Yes',
                 onClick: () => 
                     axios.delete(`${baseUrl}/delete-users/${id}`).then((response) => {
@@ -43,13 +49,13 @@ const Home = () => {
                         });
                         geteUsers();
                     })
-              },
-              {
+                },
+                {
                 label: 'No',
-              }
+                }
             ]
-          });
-       };
+            });
+    };
 
     if (!user) return null;
     return (
@@ -75,7 +81,8 @@ const Home = () => {
                                     <td>{users.email}</td>
                                     <td>{users.mobile_number}</td>
                                     <td>
-                                        <button onClick={() => deleteUser(users.id)} className='btn btn-danger'><i className="fa fa-trash"></i></button>
+                                        <button onClick={() => editUser(users)} className='btn btn-primary'><i className="fa fa-pencil"></i></button>
+                                        &nbsp;<button onClick={() => deleteUser(users.id)} className='btn btn-danger'><i className="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                             )

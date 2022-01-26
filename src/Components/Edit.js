@@ -1,6 +1,7 @@
 import React from 'react'
 
-const Edit = () => {
+const Edit = (userdata) => {
+    console.log(userdata);
     return (
         <div>
             <h1>Edit Data</h1>
