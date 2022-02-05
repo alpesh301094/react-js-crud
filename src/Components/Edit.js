@@ -103,11 +103,6 @@ const Edit = () => {
                     <div className="form-group">
                         <label for="name">Name:</label>
                         <input 
-                        type="hidden" 
-                        name="id" 
-                        id="id" 
-                        value={userId}/>
-                        <input 
                         type="text" 
                         name="name" 
                         className="form-control" 
