@@ -142,7 +142,7 @@ const Edit = () => {
                         {formik.errors.mobile_number ? <div className="text-danger">{formik.errors.mobile_number}</div> : null}
                     </div>
                     <div className="d-flex pt-1">
-                        <button type="submit" className="btn btn-success" >Submit</button>
+                        <button type="submit" className="btn btn-success" >Save</button>
                         &nbsp;<Link to="/">
                             <button type="button" className="btn btn-danger">
                                 BACK

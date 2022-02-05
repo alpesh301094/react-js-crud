@@ -44,6 +44,7 @@ const Home = () => {
                 label: 'Yes',
                 onClick: () => 
                     axios.delete(`${baseUrl}/delete-users/${id}`).then((response) => {
+                        geteUsers();
                         toast.success(response.data.message, {
                             position: "top-right",
                             autoClose: 5000,
@@ -53,7 +54,6 @@ const Home = () => {
                             draggable: true,
                             progress: undefined,
                         });
-                        geteUsers();
                     }).catch((error) =>{
                         toast.error(error.message, {
                             position: "top-right",
