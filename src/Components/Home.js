@@ -7,8 +7,6 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Edit from '../Components/Edit';
-
 toast.configure()
 
 const baseUrl = 'http://localhost/soul_business/public/api';
@@ -23,12 +21,20 @@ const Home = () => {
     const geteUsers = () =>{
         axios.get(`${baseUrl}/get-users`).then((response) => {
             setUser(response.data.data)
+        }).catch((error) => {
+            toast.error(error.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         })
     }
-    const editUser = (user) => {
-        // console.log(user);
-        <Edit userdata={user} />
-    }
+
+
     const deleteUser = (id) => {
         confirmAlert({
             title: 'Confirm!',
@@ -81,13 +87,17 @@ const Home = () => {
                                     <td>{users.email}</td>
                                     <td>{users.mobile_number}</td>
                                     <td>
-                                        <button onClick={() => editUser(users)} className='btn btn-primary'><i className="fa fa-pencil"></i></button>
-                                        &nbsp;<button onClick={() => deleteUser(users.id)} className='btn btn-danger'><i className="fa fa-trash"></i></button>
+                                        
+                                        <Link to={{pathname: `/edit/${users.id}`, state: { user: users}}}>
+                                            <button type="button" className="btn btn-primary"><i className="fa fa-pencil"></i></button>
+                                        </Link>
+
+                                        &nbsp;
+                                        <button onClick={() => deleteUser(users.id)} className='btn btn-danger'><i className="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                             )
                         }
-                        
                     </tbody>
                 </table>
             </div>
