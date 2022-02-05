@@ -80,9 +80,18 @@ const Edit = () => {
                 });
                 formik.resetForm();
             }
-            }).catch(function (response) {
+            }).catch(function (error) {
                 // handle error
                 // console.log(response);
+                toast.error(error.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             });
         },
     }); 
