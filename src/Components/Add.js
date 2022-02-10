@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Link,useHistory} from "react-router-dom";
 import {useFormik } from 'formik';
 import axios from 'axios';
@@ -31,6 +31,10 @@ const validate = values => {
 }
 
 const Add = () => {
+    useEffect(() => {
+        document.title = "Add User";
+    }, []);
+
     let history = useHistory();
     const formik = useFormik({
         initialValues: {

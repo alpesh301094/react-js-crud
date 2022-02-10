@@ -15,6 +15,7 @@ const Home = () => {
     const [user, setUser] = React.useState(null);
 
     React.useEffect(() => {
+        document.title = "User List";
         geteUsers();
     }, [])
 

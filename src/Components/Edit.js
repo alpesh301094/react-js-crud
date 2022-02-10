@@ -41,6 +41,7 @@ const Edit = () => {
     let history = useHistory();
     
     useEffect(() => {
+        document.title = "Edit User";
         loadUser();
     }, []);
         
