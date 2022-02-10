@@ -27,6 +27,10 @@ const validate = values => {
     }else if(values.mobile_number.length > 10){
         errors.mobile_number = "Must be 10 characters or less";
     }
+    
+    if(!values.user_type){
+        errors.user_type = "Required";
+    }
     return errors;
 }
 
@@ -41,10 +45,13 @@ const Add = () => {
             name: '',
             email: '',
             mobile_number: '',
+            user_type: '',
         },
         validate,
         onSubmit: values => {
             let bodyFormData = values;
+            /* console.log(bodyFormData);
+            return false; */
             axios({
                 method: "post",
                 url: `${baseUrl}/add-users`,
@@ -112,6 +119,26 @@ const Add = () => {
                         onChange={formik.handleChange}
                         value={formik.values.mobile_number}/>
                         {formik.errors.mobile_number ? <div className="text-danger">{formik.errors.mobile_number}</div> : null}
+                    </div>
+                    <div className="form-group">
+                        <label for="name">User Type:</label>
+                        <select className="form-control" name="user_type" id="user_type" onChange={formik.handleChange} value={formik.values.user_type}>
+                            <option value="">Select User Type</option>    
+                            <option value="Business Provider">Business Provider</option>    
+                            <option value="Business User">Business User</option>    
+                        </select>  
+                        {formik.errors.user_type ? <div className="text-danger">{formik.errors.user_type}</div> : null}
+                    </div>
+                    <div className="form-group">
+                        <label for="name">Profile Photo:</label>
+                        <input 
+                        type="file" 
+                        name="profile_photo" 
+                        className="form-control" 
+                        placeholder="Enter Mobile Number" 
+                        id="profile_photo" 
+                        onChange={formik.handleChange}
+                        value={formik.values.profile_photo}/>
                     </div>
                     <div className="d-flex pt-1">
                         <button type="submit" className="btn btn-success" >Save</button>

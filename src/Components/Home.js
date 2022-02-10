@@ -87,16 +87,26 @@ const Home = () => {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Mobile Number</th>
+                        <th>User Type</th>
+                        <th>Status</th>
+                        <th>Photo</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                         {
                             user.map((users, index) =>
-                                <tr>
+                                <tr key={index}>
                                     <td>{users.name}</td>
                                     <td>{users.email}</td>
                                     <td>{users.mobile_number}</td>
+                                    <td>{users.user_type}</td>
+                                    <td>
+                                        {users.status}
+                                    </td>
+                                    <td>
+                                        <img src={users.profile_photo_path} width="100"/>
+                                    </td>
                                     <td>
                                         
                                         <Link to={{pathname: `/edit/${users.id}`, state: { user: users}}}>
