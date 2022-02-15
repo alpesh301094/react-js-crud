@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { Link,useHistory} from "react-router-dom";
 import {useFormik } from 'formik';
 import axios from 'axios';
@@ -35,6 +35,14 @@ const validate = values => {
 }
 
 const Add = () => {
+
+    const [selectedFile, setSelectedFile] = useState("");
+
+    const onFileChange = (event) =>{
+        const file = event.target.files[0];
+        setSelectedFile(file);
+    }
+
     useEffect(() => {
         document.title = "Add User";
     }, []);
@@ -50,8 +58,9 @@ const Add = () => {
         validate,
         onSubmit: values => {
             let bodyFormData = values;
-            /* console.log(bodyFormData);
-            return false; */
+            // bodyFormData.profile_photo = selectedFile; 
+            // console.log(bodyFormData);
+            // return false;
             axios({
                 method: "post",
                 url: `${baseUrl}/add-users`,
@@ -78,8 +87,7 @@ const Add = () => {
                     // console.log(response);
                 });
         },
-    }); 
-
+    });
   return (
         <div className="row justify-content-center">
             <div className="col-4">
@@ -129,17 +137,15 @@ const Add = () => {
                         </select>  
                         {formik.errors.user_type ? <div className="text-danger">{formik.errors.user_type}</div> : null}
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label for="name">Profile Photo:</label>
                         <input 
                         type="file" 
                         name="profile_photo" 
-                        className="form-control" 
-                        placeholder="Enter Mobile Number" 
+                        className="form-control"
                         id="profile_photo" 
-                        onChange={formik.handleChange}
-                        value={formik.values.profile_photo}/>
-                    </div>
+                        onChange={onFileChange}/>
+                    </div> */}
                     <div className="d-flex pt-1">
                         <button type="submit" className="btn btn-success" >Save</button>
                         &nbsp;<Link to="/">
