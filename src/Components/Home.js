@@ -102,7 +102,12 @@ const Home = () => {
                                     <td>{users.mobile_number}</td>
                                     <td>{users.user_type}</td>
                                     <td>
-                                        {users.status}
+                                        {
+                                        users.status === "Enabled" ? 
+                                        <button className='btn btn-success'>{users.status}</button> 
+                                        : 
+                                        <button className='btn btn-danger'>{users.status}</button>
+                                        }
                                     </td>
                                     {/* <td>
                                         <img src={users.profile_photo_path} width="100"/>
